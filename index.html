@@ -1,0 +1,87 @@
+
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Kelime Takibi Egzersizi</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f8f9fa;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      margin: 0;
+    }
+    h1 {
+      margin-bottom: 20px;
+    }
+    #kelime {
+      font-size: 2.5rem;
+      font-weight: bold;
+      background: #fff;
+      padding: 20px 40px;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      margin-bottom: 30px;
+    }
+    .controls {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 20px;
+    }
+    button, select {
+      padding: 10px 20px;
+      font-size: 1rem;
+      border: none;
+      border-radius: 5px;
+      background-color: #198754;
+      color: white;
+      cursor: pointer;
+    }
+    button:hover, select:hover {
+      background-color: #157347;
+    }
+  </style>
+</head>
+<body>
+  <h1>Kelime Takibi Egzersizi</h1>
+  <div id="kelime">Hazır mısın?</div>
+  <div class="controls">
+    <button onclick="baslat()">Başla</button>
+    <select id="hiz" onchange="setHiz()">
+      <option value="2000">Yavaş</option>
+      <option value="1000" selected>Orta</option>
+      <option value="500">Hızlı</option>
+    </select>
+  </div>
+  <script>
+    const kelimeler = [
+      "elma", "masa", "kalem", "kitap", "ışık", "ayna", "telefon",
+      "çanta", "defter", "sandalye", "pencere", "yastık", "gözlük",
+      "okul", "perde", "dolap", "yorgan", "bilgisayar", "tahta"
+    ];
+    let index = 0;
+    let interval = null;
+    let sure = 1000;
+    function gosterKelime() {
+      document.getElementById("kelime").textContent = kelimeler[index];
+      index = (index + 1) % kelimeler.length;
+    }
+    function baslat() {
+      clearInterval(interval);
+      index = 0;
+      gosterKelime();
+      interval = setInterval(gosterKelime, sure);
+    }
+    function setHiz() {
+      const secim = document.getElementById("hiz").value;
+      sure = parseInt(secim);
+      baslat();
+    }
+  </script>
+</body>
+</html>
